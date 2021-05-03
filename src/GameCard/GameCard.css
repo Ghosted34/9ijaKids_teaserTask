@@ -1,0 +1,13 @@
+.gamecard{
+    border: solid 1px grey;
+    margin: 15px;
+    padding: 15px;
+    box-shadow: 4px 4px grey;
+    max-width: 300px;
+    display: inline-block;
+}
+
+img{
+    width: 200px;
+    height: 150px;
+}
