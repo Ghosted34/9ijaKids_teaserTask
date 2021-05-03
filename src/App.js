@@ -4,7 +4,7 @@ import GameCard from './GameCard/GameCard'
 import './App.css';
 
 function App() {
-  // const url = "https://partners.9ijakids.com/index.php?partnerId=555776&accessToken=l0lawtvv-94bv-oi4d-u808-5ubz&action=catalogfilter";
+  
   const [gameState, setGameState] = useState(
     [{"GameTitle":"Before and After","GameDescription":"Before and After Yr 2 (prefix and suffix)","Topic":"Word Works and Spelling","Group":"Academic","Level":"Key Stage 1","Subject":"English","GameImage":"https:\/\/partners.9ijakids.com\/index.php\/thumbnail?game=Before and After"},
     {"GameTitle":"Communication","GameDescription":"Communication Yr 2 (different ways we can communicate)","Topic":"Social Studies","Group":"Academic","Level":"Key Stage 1","Subject":"Social Studies","GameImage":"https:\/\/partners.9ijakids.com\/index.php\/thumbnail?game=Communication"},
@@ -14,20 +14,6 @@ function App() {
     {"GameTitle":"Exploring Life","GameDescription":"Exploring Life KS","Topic":"Living Things & Non-Living Things","Group":"Academic","Level":"Key Stage 1","Subject":"Science","GameImage":"https:\/\/partners.9ijakids.com\/index.php\/thumbnail?game=Exploring Life"},
     {"GameTitle":"Mathsmania City - Decimals","GameDescription":"Mathsmania City - Decimal","Topic":"Decimals, Fractions & Percentage","Group":"Academic","Level":"Key Stage 2","Subject":"Mathematics","GameImage":"https:\/\/partners.9ijakids.com\/index.php\/thumbnail?game=Mathsmania City - Decimals"}]
   );
-
-//   const fetchData = async() =>{
-//     try{
-//       const response = await axios.get(url);
-//       setGameState(response.data)
-//     }catch(e){
-//       console.log(e)
-//     }
-//   };
-  
-// useEffect(() =>{
-//   fetchData();
-// }, [])
-
 
   const [searchState, setSearchState] = useState("")
   const [groupFilter, setGroupFilter] = useState("")
