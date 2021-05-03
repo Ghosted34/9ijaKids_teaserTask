@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   
-  const [gameState, setGameState] = useState(
+  const [gameState] = useState(
     [{"GameTitle":"Before and After","GameDescription":"Before and After Yr 2 (prefix and suffix)","Topic":"Word Works and Spelling","Group":"Academic","Level":"Key Stage 1","Subject":"English","GameImage":"https://partners.9ijakids.com/index.php/thumbnail?game=Before and After"},
     {"GameTitle":"Communication","GameDescription":"Communication Yr 2 (different ways we can communicate)","Topic":"Social Studies","Group":"Academic","Level":"Key Stage 1","Subject":"Social Studies","GameImage":"https://partners.9ijakids.com/index.php/thumbnail?game=Communication"},
     {"GameTitle":"Kiddiepreneur 101","GameDescription":"Kiddiepreneur 101 (Intro to Earning and Spending)","Topic":"Financial Literacy","Group":"Financial Literacy","Level":"Financial Literacy","Subject":"Financial Literacy","GameImage":"https://partners.9ijakids.com/index.php/thumbnail?game=Kiddiepreneur 101"},
