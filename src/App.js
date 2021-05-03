@@ -9,13 +9,7 @@ function App() {
 
   const fetchData = async() =>{
     try{
-      axios.create({
-        header: {
-          'Content-Type': 'application/json'
-        }
-      });
-      const response = await axios.get(url)
-      console.log(response)
+      const response = await axios.get(url);
       setGameState(response.data)
     }catch(e){
       console.log(e)
