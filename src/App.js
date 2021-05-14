@@ -1,22 +1,43 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import GameCard from './GameCard/GameCard'
+import Loader from './Loader/Loader'
 import './App.css';
 
 function App() {
   
-  const [gameState] = useState(
-    [{"GameTitle":"Before and After","GameDescription":"Before and After Yr 2 (prefix and suffix)","Topic":"Word Works and Spelling","Group":"Academic","Level":"Key Stage 1","Subject":"English","GameImage":"https://partners.9ijakids.com/index.php/thumbnail?game=Before and After"},
-    {"GameTitle":"Communication","GameDescription":"Communication Yr 2 (different ways we can communicate)","Topic":"Social Studies","Group":"Academic","Level":"Key Stage 1","Subject":"Social Studies","GameImage":"https://partners.9ijakids.com/index.php/thumbnail?game=Communication"},
-    {"GameTitle":"Kiddiepreneur 101","GameDescription":"Kiddiepreneur 101 (Intro to Earning and Spending)","Topic":"Financial Literacy","Group":"Financial Literacy","Level":"Financial Literacy","Subject":"Financial Literacy","GameImage":"https://partners.9ijakids.com/index.php/thumbnail?game=Kiddiepreneur 101"},
-    {"GameTitle":"Money Matters","GameDescription":"Money Matters (Intro to Key Financial Terms)","Topic":"Financial Literacy","Group":"Financial Literacy","Level":"Financial Literacy","Subject":"Financial Literacy","GameImage":"https://partners.9ijakids.com/index.php/thumbnail?game=Money Matters"},
-    {"GameTitle":"Maths Pop","GameDescription":"Maths Pop (writing numbers in word, sequencing & ordinal numbers)","Topic":"Number Sense","Group":"Academic","Level":"Key Stage 1","Subject":"Mathematics","GameImage":"https://partners.9ijakids.com/index.php/thumbnail?game=Maths Pop"},
-    {"GameTitle":"Exploring Life","GameDescription":"Exploring Life KS","Topic":"Living Things & Non-Living Things","Group":"Academic","Level":"Key Stage 1","Subject":"Science","GameImage":"https://partners.9ijakids.com/index.php/thumbnail?game=Exploring Life"},
-    {"GameTitle":"Mathsmania City - Decimals","GameDescription":"Mathsmania City - Decimal","Topic":"Decimals, Fractions & Percentage","Group":"Academic","Level":"Key Stage 2","Subject":"Mathematics","GameImage":"https://partners.9ijakids.com/index.php/thumbnail?game=Mathsmania City - Decimals"}]
-  );
-
+  const [gameState,setGameState] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [searchState, setSearchState] = useState("")
   const [groupFilter, setGroupFilter] = useState("")
   const [levelFilter, setLevelFilter] = useState("")
+
+  
+  const cors_fix = "https://afternoon-ridge-35420.herokuapp.com/";
+  const url = "https://bit.ly/TeaserTask";
+  
+  const fetchData = async() =>{
+    try{
+      const res = await fetch(cors_fix+url);
+      const response = await res.json();
+      console.log(response);
+      setGameState(response);
+      
+    }catch(e){
+      console.log(e)
+    }
+  };
+  
+  useEffect(() =>{
+    fetchData();
+    setIsLoaded(true);
+  }, [])
+  
+  let loadingScreen = null
+  while (isLoaded === false) {
+    loadingScreen= (<Loader/>)
+  }
+  
+  
 
   const setSearchTerm =(event)=>{
       setSearchState(event.target.value);
@@ -45,7 +66,7 @@ if(gameState){
   content = (
     <div>
         {renderList().map(game =>{
-          return (<GameCard title={game.GameTitle} desc={game.GameDescription} image={game.GameImage}/>)
+          return (<GameCard title={game.GameTitle} desc={game.GameDescription} image={game.GameImage} key={game.GameTitle}/>)
         })
         }
     </div>
@@ -58,7 +79,7 @@ if(gameState){
     <div className="App">
       <div className="jumbotron">
       <header className="header">9ija Kids Game List</header>
-      <input type ="text" onChange={setSearchTerm} placeholder="Search" value={searchState} className="searchBar"/>
+      <input type ="search" onChange={setSearchTerm} placeholder="Search" value={searchState} className="searchBar"/>
       </div>
      
      <div className="filter">
@@ -81,10 +102,8 @@ if(gameState){
         <option key="Financial Literacy" value="Financial Literacy">Financial Literacy</option>
       </select>
       </label>
-      
-      
-
      </div>
+      {loadingScreen}
       {content}
     </div>
   )
