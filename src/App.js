@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   
   const [gameState,setGameState] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchState, setSearchState] = useState("")
   const [groupFilter, setGroupFilter] = useState("")
   const [levelFilter, setLevelFilter] = useState("")
@@ -16,6 +16,7 @@ function App() {
   const url = "https://bit.ly/TeaserTask";
   
   const fetchData = async() =>{
+    setIsLoading(true)
     try{
       const res = await fetch(cors_fix+url);
       const response = await res.json();
@@ -25,17 +26,15 @@ function App() {
     }catch(e){
       console.log(e)
     }
+    finally{
+      setIsLoading(false)
+    }
   };
   
   useEffect(() =>{
     fetchData();
-    setIsLoaded(true);
   }, [])
   
-  let loadingScreen = null
-  while (isLoaded === false) {
-    loadingScreen= (<Loader/>)
-  }
   
   
 
@@ -74,6 +73,9 @@ if(gameState){
   )
 }
   
+if(isLoading){
+  return <Loader/>
+}
 
   return (
     <div className="App">
@@ -103,7 +105,6 @@ if(gameState){
       </select>
       </label>
      </div>
-      {loadingScreen}
       {content}
     </div>
   )
