@@ -61,7 +61,7 @@ function App() {
 
 let content = null
 
-if(gameState){
+if(gameState && isLoading === false){
   content = (
     <div>
         {renderList().map(game =>{
@@ -72,10 +72,10 @@ if(gameState){
 
   )
 }
-  
-if(isLoading){
-  return <Loader/>
+else{
+  content = <Loader/>
 }
+  
 
   return (
     <div className="App">

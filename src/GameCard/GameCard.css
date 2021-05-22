@@ -5,6 +5,7 @@
     box-shadow: 4px 4px grey;
     max-width: 300px;
     display: inline-block;
+    border-radius: 5px;
 }
 
 img{
